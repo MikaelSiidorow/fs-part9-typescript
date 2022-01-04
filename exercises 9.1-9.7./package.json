@@ -1,0 +1,19 @@
+{
+  "name": "exercises-9.1-9.7.",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-node": "ts-node",
+    "calculateBmi": "ts-node bmiCalculator.ts",
+    "calculateExercises" : "ts-node exerciseCalculator.ts"
+  },
+  "author": "Mikael Siidorow",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.5",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
