@@ -1,3 +1,21 @@
+interface CalculateExercises {
+  dailyHours: Array<number>,
+  target: number
+}
+
+const parseExerciseArguments = (args: Array<string>): CalculateExercises => {
+  if (args.length < 4) throw new Error('Not enough arguments');
+
+  if (args.slice(2).map(arg => Number(arg)).every(n => !isNaN(n))) {
+    return {
+      dailyHours: args.slice(3).map(n => Number(n)),
+      target: Number(args[2])
+    }
+  } else {
+    throw new Error('Provided values were not numbers!');
+  }
+}
+
 interface ExerciseData {
   periodLength: number,
   trainingDays: number,
@@ -49,4 +67,15 @@ const calculateExercises = (dailyHours: Array<number>, target: number): Exercise
   )
 }
 
-console.log(JSON.stringify(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2)));
+//console.log(JSON.stringify(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2)));
+
+try {
+  const { dailyHours, target } = parseExerciseArguments(process.argv);
+  console.log(JSON.stringify(calculateExercises(dailyHours, target)))
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.';
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
