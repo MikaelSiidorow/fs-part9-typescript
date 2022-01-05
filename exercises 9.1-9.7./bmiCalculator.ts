@@ -11,11 +11,11 @@ const parseBmiArguments = (args: Array<string>): HeightWeight => {
     return {
       height: Number(args[2]),
       weight: Number(args[3])
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 export const calculateBmi = (height: number, weight: number) : string => {
   const bmi = weight / ((height/100) * (height/100));
@@ -44,7 +44,7 @@ export const calculateBmi = (height: number, weight: number) : string => {
   else {
     return 'Obese (Class III)';
   }
-}
+};
 
 //console.log(calculateBmi(180, 74));
 

@@ -10,11 +10,11 @@ const parseExerciseArguments = (args: Array<string>): CalculateExercises => {
     return {
       dailyHours: args.slice(3).map(n => Number(n)),
       target: Number(args[2])
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 interface ExerciseData {
   periodLength: number,
@@ -26,15 +26,15 @@ interface ExerciseData {
   average: number
 }
 
-const calculateExercises = (dailyHours: Array<number>, target: number): ExerciseData => {
+export const calculateExercises = (dailyHours: Array<number>, target: number): ExerciseData => {
   const numberOfDays = dailyHours.length;
-  const numberOfTrainingDays = dailyHours.filter(day => day > 0).length
+  const numberOfTrainingDays = dailyHours.filter(day => day > 0).length;
   const sumOfHours = dailyHours.reduce((s, i) => s + i, 0);
   const averageDailyTime = sumOfHours / numberOfDays;
   const targetReached = averageDailyTime > target;
 
   const ratingMetric = 0.5; //30 mins less than average
-  var rating = 1; //initialize value
+  let rating = 1; //initialize value
 
   if (averageDailyTime >= target) {
     rating = 3;
@@ -43,7 +43,7 @@ const calculateExercises = (dailyHours: Array<number>, target: number): Exercise
     rating = 2;
   }
 
-  var ratingDescription = ''
+  let ratingDescription = '';
   if (rating == 3) {
     ratingDescription = 'Amazing, you met your target';
   }
@@ -64,14 +64,14 @@ const calculateExercises = (dailyHours: Array<number>, target: number): Exercise
       target,
       average: averageDailyTime
     }
-  )
-}
+  );
+};
 
 //console.log(JSON.stringify(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2)));
 
 try {
   const { dailyHours, target } = parseExerciseArguments(process.argv);
-  console.log(JSON.stringify(calculateExercises(dailyHours, target)))
+  console.log(JSON.stringify(calculateExercises(dailyHours, target)));
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {
