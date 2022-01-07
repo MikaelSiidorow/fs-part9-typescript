@@ -13,8 +13,9 @@ router.get('/:id', (req, res) => {
   const patient = patientService.getEntries().find(p => p.id === req.params.id);
   if (patient) {
     res.send(patient);
-  }
+  } else {
   res.status(400).send({ error: 'patient not found' });
+  }
 });
 
 router.post('/', (req, res) => {
